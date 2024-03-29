@@ -1,0 +1,16 @@
+﻿{
+  "Routes": [
+    {
+      "UpStreamPathTemplate": "/gateway/test",
+      "UpStreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownStreamPathTemplate": "/api/test",
+      "DownStreamScheme": "https",
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44344"
+        }
+      ]
+    }
+  ]
+}
