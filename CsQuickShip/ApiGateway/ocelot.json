@@ -1,14 +1,15 @@
 ﻿{
   "Routes": [
     {
-      "UpStreamPathTemplate": "/gateway/test",
+      "UpStreamPathTemplate": "/gateway/LabelMicroservices",
       "UpStreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "DownStreamPathTemplate": "/api/test",
+
+      "DownStreamPathTemplate": "/api/LabelMicroservices",
       "DownStreamScheme": "https",
       "DownStreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": "44344"
+          "Port": "44306"
         }
       ]
     }
