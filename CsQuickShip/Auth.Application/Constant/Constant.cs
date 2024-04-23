@@ -15,7 +15,7 @@ public class Constant
 public class ApiRoute {
     public const string Register = "Register";
     public const string Login = "Login";
-    public const string Refresh = "Refresh";
+    public const string RefreshToken = "RefreshToken";
     public const string GetAllUser = "GetAllUser";
 }
 
