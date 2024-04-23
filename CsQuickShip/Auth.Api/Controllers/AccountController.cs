@@ -24,8 +24,8 @@ public class AccountController : ControllerBase
     [Route(ApiRoute.Register)]
     public async Task<IActionResult> Register(ApplicationUserDto user)
     {
-        ApplicationUserDto userData = await _sender.Send(new RegistrationCommand(user));
-        return new ApiResponseActionResult<ApplicationUserDto>(userData);
+        string userData = await _sender.Send(new RegistrationCommand(user));
+        return new ApiResponseActionResult<string>(userData);
     }
     [HttpPost]
     [Route(ApiRoute.Login)]

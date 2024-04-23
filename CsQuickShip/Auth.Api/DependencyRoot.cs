@@ -16,7 +16,7 @@ namespace Auth.Api;
 public static class DependecyRoot
 {
 
-    private static readonly string _allowSpecificOrigin = "_APICorsPolicy";
+    private static readonly string _allowSpecificOrigin = "MyPolicy";
     public static void AddDependency(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
@@ -25,7 +25,7 @@ public static class DependecyRoot
         /*Enable CORS*/
         services.AddCors(options => options.AddPolicy(_allowSpecificOrigin, builder =>
         {
-            builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+            builder.WithOrigins("https://localhost:4200").AllowAnyMethod().AllowAnyHeader();
             builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
         }));
         services.AddInfrstructures().AddDbContext(configuration);

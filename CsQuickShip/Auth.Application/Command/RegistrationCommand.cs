@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Auth.Application.Command;
-public class RegistrationCommand:IRequest<ApplicationUserDto>
+public class RegistrationCommand:IRequest<string>
 {
     public readonly ApplicationUserDto _userDto;
     public RegistrationCommand(ApplicationUserDto user)

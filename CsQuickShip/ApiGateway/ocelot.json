@@ -25,15 +25,27 @@
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     },
     {
-      "DownstreamPathTemplate": "/auth",
+      "DownstreamPathTemplate": "/api/account/Register",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7021
+          "Port": 7169
         }
       ],
-      "UpstreamPathTemplate": "/api/auth",
+      "UpstreamPathTemplate": "/auth/register",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/account/Login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7169
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/login",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     }
   ]
