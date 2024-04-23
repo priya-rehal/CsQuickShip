@@ -1,31 +1,7 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/registration",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7019
-        }
-      ],
-      "UpstreamPathTemplate": "/api/registration",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-    },
-    {
-      "DownstreamPathTemplate": "/trackship",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7020
-        }
-      ],
-      "UpstreamPathTemplate": "/api/trackship",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/account/Register",
+      "DownstreamPathTemplate": "/api/User",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -33,11 +9,11 @@
           "Port": 7169
         }
       ],
-      "UpstreamPathTemplate": "/auth/register",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamPathTemplate": "/UsersDetails",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
     },
     {
-      "DownstreamPathTemplate": "/api/account/Login",
+      "DownstreamPathTemplate": "/api/User/{Id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -45,8 +21,12 @@
           "Port": 7169
         }
       ],
-      "UpstreamPathTemplate": "/auth/login",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamPathTemplate": "/UsersDetailById/{Id}",
+      "UpstreamHttpMethod": [ "GET" ]
     }
-  ]
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7239"
+  }
+
 }

@@ -13,7 +13,7 @@ using Auth.Infrastructure;
 
 namespace Auth.Api;
 
-public static class DependecyRoot
+public static class DependencyRoot
 {
 
     private static readonly string _allowSpecificOrigin = "MyPolicy";

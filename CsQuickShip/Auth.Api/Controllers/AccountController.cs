@@ -36,7 +36,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost]
-    [Route(ApiRoute.Refresh)]
+    [Route(ApiRoute.RefreshToken)]
     public async Task<IActionResult> Refresh(TokenDto tokenApiModel)
     {
        LoginResultDto response=await _sender.Send(new RefreshTokenCommand(tokenApiModel));

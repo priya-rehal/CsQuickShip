@@ -9,6 +9,6 @@ builder.Services.AddOcelot(builder.Configuration);
 builder.Services.ApiGatewayDependency(builder.Configuration);
 
 var app = builder.Build();
-app.UseCors("MyPolicy");
-app.UseOcelot().Wait();
+
+await app.UseOcelot();
 app.Run();
