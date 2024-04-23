@@ -12,10 +12,6 @@ public class ApplicationUser : IdentityUser<Guid>, IEntity<Guid>
 {
     public string? ContactNo { get; set; }
     public string? CompanyName { get; set; }
-    [NotMapped]
     public string? RefreshToken {  get; set; }
-    [NotMapped]
-    public DateTime CreatedDate { get; set; }
-    [NotMapped]
     public DateTime RefreshTokenExpiryTime { get; set; }
 }
