@@ -39,13 +39,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.Infrastructure", "Auth
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FedexRates", "FedexRates", "{F0861044-D508-48C1-BC3F-1CAD9258957D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fedex.Domain", "Fedex.Domain\Fedex.Domain.csproj", "{FA93AA2B-5D01-4729-9968-7BBBB014BA78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fedex.Domain", "Fedex.Domain\Fedex.Domain.csproj", "{FA93AA2B-5D01-4729-9968-7BBBB014BA78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fedex.Application", "Fedex.Application\Fedex.Application.csproj", "{3575D2FC-2B0E-4CFB-AE88-BA998A3447DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fedex.Application", "Fedex.Application\Fedex.Application.csproj", "{3575D2FC-2B0E-4CFB-AE88-BA998A3447DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fedex.Infrastructure", "Fedex.Infrastructure\Fedex.Infrastructure.csproj", "{65DAF0DC-9EA1-4E15-A8B5-DE5ABC892BF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fedex.Infrastructure", "Fedex.Infrastructure\Fedex.Infrastructure.csproj", "{65DAF0DC-9EA1-4E15-A8B5-DE5ABC892BF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fedex.Api", "Fedex.Api\Fedex.Api.csproj", "{F1C2DB72-DCFA-4E11-B699-DB878F6104CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fedex.Api", "Fedex.Api\Fedex.Api.csproj", "{F1C2DB72-DCFA-4E11-B699-DB878F6104CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LabelMicroservices", "LabelMicroservices", "{461CE89E-3E30-4E08-8736-469F11A3011F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Label.Api", "Label.Api\Label.Api.csproj", "{68D67C1E-401A-44AF-824F-33B4C9F26EFA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Label.Domain", "Label.Domain\Label.Domain.csproj", "{B6A98571-DFF2-4855-A09F-DA334A17C40E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Label.Infrastructure", "Label.Infrastructure\Label.Infrastructure.csproj", "{65B959C0-934A-4366-8232-21F74FC08D71}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Label.Application", "Label.Application\Label.Application.csproj", "{B0D5B5F9-0669-47A9-84BE-0FFB25479C5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +131,22 @@ Global
 		{F1C2DB72-DCFA-4E11-B699-DB878F6104CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1C2DB72-DCFA-4E11-B699-DB878F6104CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1C2DB72-DCFA-4E11-B699-DB878F6104CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D67C1E-401A-44AF-824F-33B4C9F26EFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D67C1E-401A-44AF-824F-33B4C9F26EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D67C1E-401A-44AF-824F-33B4C9F26EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D67C1E-401A-44AF-824F-33B4C9F26EFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6A98571-DFF2-4855-A09F-DA334A17C40E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6A98571-DFF2-4855-A09F-DA334A17C40E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6A98571-DFF2-4855-A09F-DA334A17C40E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6A98571-DFF2-4855-A09F-DA334A17C40E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65B959C0-934A-4366-8232-21F74FC08D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65B959C0-934A-4366-8232-21F74FC08D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65B959C0-934A-4366-8232-21F74FC08D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65B959C0-934A-4366-8232-21F74FC08D71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0D5B5F9-0669-47A9-84BE-0FFB25479C5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D5B5F9-0669-47A9-84BE-0FFB25479C5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0D5B5F9-0669-47A9-84BE-0FFB25479C5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D5B5F9-0669-47A9-84BE-0FFB25479C5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

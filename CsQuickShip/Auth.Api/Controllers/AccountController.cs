@@ -24,8 +24,8 @@ public class AccountController : ControllerBase
     [Route(ApiRoute.Register)]
     public async Task<IActionResult> Register(ApplicationUserDto user)
     {
-        ApplicationUserDto userData = await _sender.Send(new RegistrationCommand(user));
-        return new ApiResponseActionResult<ApplicationUserDto>(userData);
+        string userData = await _sender.Send(new RegistrationCommand(user));
+        return new ApiResponseActionResult<string>(userData);
     }
     [HttpPost]
     [Route(ApiRoute.Login)]
@@ -36,7 +36,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost]
-    [Route(ApiRoute.Refresh)]
+    [Route(ApiRoute.RefreshToken)]
     public async Task<IActionResult> Refresh(TokenDto tokenApiModel)
     {
        LoginResultDto response=await _sender.Send(new RefreshTokenCommand(tokenApiModel));

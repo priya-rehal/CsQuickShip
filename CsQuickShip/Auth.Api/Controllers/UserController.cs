@@ -18,8 +18,14 @@ public class UserController : ControllerBase
         _sender = sender;
     }
     [HttpGet]
-    [Route(ApiRoute.GetAllUser)]
     public async Task<IActionResult> GetAllUsers()
+    {
+        List<UserDto> response = await _sender.Send(new GetUserQuery());
+        return new ApiResponseActionResult<List<UserDto>>(response);
+
+    }
+    [HttpGet("{Id}")]
+    public async Task<IActionResult> GetUserById(string Id)
     {
         List<UserDto> response = await _sender.Send(new GetUserQuery());
         return new ApiResponseActionResult<List<UserDto>>(response);

@@ -17,7 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CsRegistrationLogin.Application.CommandHandler;
-public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, ApplicationUserDto>
+public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, string>
 {
     private readonly IMapper _mapper;
     private readonly Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> _userManager;
@@ -32,7 +32,7 @@ public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, A
         _userManager = userManager ?? throw new ArgumentNullException();
         _userRepository = userRepository ?? throw new ArgumentNullException();
     }
-    public async Task<ApplicationUserDto> Handle(RegistrationCommand request, CancellationToken cancellationToken)
+    public async Task<string> Handle(RegistrationCommand request, CancellationToken cancellationToken)
     {
         if (request._userDto == null)
         {
@@ -71,7 +71,7 @@ public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, A
             }
 
             ApplicationUserDto createdUserDto = _mapper.Map<ApplicationUserDto>(applicationUser);
-            return createdUserDto;
+            return "added";
         }
         catch (Exception ex)
         {

@@ -7,5 +7,6 @@ public interface IRepository<TEntity, TPrimaryKey> : IReadOnlyRepository<TEntity
 {
     void Create(TEntity entity);
     Task SaveAsync();
+    void Update(TEntity entity);
     void Save();
 }

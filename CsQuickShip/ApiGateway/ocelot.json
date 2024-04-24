@@ -1,40 +1,32 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/registration",
+      "DownstreamPathTemplate": "/api/User",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7019
+          "Port": 7169
         }
       ],
-      "UpstreamPathTemplate": "/api/registration",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamPathTemplate": "/UsersDetails",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
     },
     {
-      "DownstreamPathTemplate": "/trackship",
+      "DownstreamPathTemplate": "/api/User/{Id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7020
+          "Port": 7169
         }
       ],
-      "UpstreamPathTemplate": "/api/trackship",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-    },
-    {
-      "DownstreamPathTemplate": "/auth",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7021
-        }
-      ],
-      "UpstreamPathTemplate": "/api/auth",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+      "UpstreamPathTemplate": "/UsersDetailById/{Id}",
+      "UpstreamHttpMethod": [ "GET" ]
     }
-  ]
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7239"
+  }
+
 }
