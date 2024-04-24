@@ -11,11 +11,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Auth.Application.CommandHandler;
+namespace Auth.Application.QueryHandler;
 public class UserQueryHandler : IRequestHandler<GetUserQuery, List<UserDto>>
 {
     private readonly IUserRepository _userRepository;
-    public UserQueryHandler(UserManager<ApplicationUser> userManager,IUserRepository userRepository)
+    public UserQueryHandler(UserManager<ApplicationUser> userManager, IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }

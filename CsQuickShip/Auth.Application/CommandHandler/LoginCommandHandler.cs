@@ -58,6 +58,10 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResultDto>
             {
                 throw new InvalidOperationException("Incorrect username or password");
             }
+            if (!applicationUser.EmailConfirmed)
+            {
+                throw new InvalidOperationException("Email not Verify! Please Verify you'r email");
+            }
 
             SignInResult loginResult = await _signInManager.PasswordSignInAsync(applicationUser, request._login.Password, true, false);
 

@@ -43,4 +43,31 @@ public class AccountController : ControllerBase
         return new ApiResponseActionResult<LoginResultDto>(response);
 
     }
+
+    [HttpPost]
+    [Route(ApiRoute.ForgotPassword)]
+    public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto forgotPassword)
+    {
+        bool response = await _sender.Send(new ForgotPasswordCommand(forgotPassword));
+        return new ApiResponseActionResult<bool>(response);
+
+    }
+
+    [HttpPost]
+    [Route(ApiRoute.ResetPassword)]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPassword)
+    {
+        bool response = await _sender.Send(new ResetPasswordCommand(resetPassword));
+        return new ApiResponseActionResult<bool>(response);
+
+    }
+
+    [HttpPost]
+    [Route(ApiRoute.EmailConfimation)]
+    public async Task<IActionResult> EmailConfimation([FromBody] ResetPasswordDto resetPassword)
+    {
+        bool response = await _sender.Send(new EmailConfirmationCommand(resetPassword));
+        return new ApiResponseActionResult<bool>(response);
+
+    }
 }
