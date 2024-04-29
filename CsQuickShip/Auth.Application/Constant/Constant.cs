@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace Auth.Application.Constant;
 public class Constant
@@ -15,7 +16,8 @@ public class Constant
     // Constant for the role of Employee user
     public const string User = "User";
 }
-public class ApiRoute {
+public class ApiRoute
+{
     public const string Register = "Register";
     public const string Login = "Login";
     public const string RefreshToken = "RefreshToken";
@@ -38,13 +40,13 @@ public static class EmailSubjects
 
 public static class EmailCallBackFunction
 {
-    public static string GenerateCallbackUrl(string email, string token, UrlType type)
+    public static string GenerateCallbackUrl(string frontendUrl,string email, string token, UrlType type)
     {
         return type switch
         {
-            UrlType.EmailConfirmation => $"{"Paste URL Here"}?email={email}&token={token}",
-            UrlType.ForgetPassword => $"{"Paste URL Here"}?email={email}&token={token}",
-            UrlType.ResetPassword => $"{"Paste URL Here"}?email={email}&token={token}",
+            UrlType.EmailConfirmation => $"{frontendUrl}/auth/emailConfirm?token={token}&email={email}",
+            UrlType.ForgetPassword => $"{frontendUrl}/auth/reset?token={token}&email={email}",
+            UrlType.ResetPassword => $"{frontendUrl}?email={email}&token={token}",
             _ => throw new NotImplementedException()
         };
     }

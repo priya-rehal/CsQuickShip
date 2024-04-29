@@ -7,5 +7,5 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Auth.Application.Command;
-public record EmailConfirmationCommand(ResetPasswordDto resetPassword):IRequest<bool>;
+public record EmailConfirmationCommand(EmailConfirmDto EmailConfirm):IRequest<bool>;
 

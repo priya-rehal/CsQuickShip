@@ -11,22 +11,29 @@ using Microsoft.AspNet.Identity;
 namespace Auth.Application.Services;
 public class EmailSender(IFluentEmail _fluentEmail) : IEmailSender
 {
-    public void SendEmailAsync(string email, string subject, string body)
+    public async Task<bool> SendEmailAsync(string email, string subject, string body)
     {
         if (IsValid(email, subject, body))
         {
-            ExecuteMailAsync(email, subject, body);
+            var response = await ExecuteMailAsync(email, subject, body);
+            return response;
         }
+        else return false;
     }
-    private async void ExecuteMailAsync(string email, string subject, string body)
+    private async Task<bool> ExecuteMailAsync(string email, string subject, string body)
     {
         try
         {
-            await _fluentEmail
+           var response= await _fluentEmail
                .To(email)
                .Subject(subject)
                .Body(body)
                .SendAsync();
+            if (response.Successful)
+            {
+                return true;
+            }
+            return false;
         }
         catch (Exception cx)
         {

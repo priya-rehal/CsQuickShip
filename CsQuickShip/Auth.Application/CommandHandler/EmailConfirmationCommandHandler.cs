@@ -5,31 +5,31 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using static Auth.Application.Execptions.BusinessException;
 
 namespace Auth.Application.CommandHandler;
-internal class EmailConfirmationCommandHandler(
-    UserManager<ApplicationUser> _userManager
-    ) : IRequestHandler<EmailConfirmationCommand, bool>
+internal class EmailConfirmationCommandHandler(UserManager<ApplicationUser> _userManager) : IRequestHandler<EmailConfirmationCommand, bool>
 {
     public async Task<bool> Handle(EmailConfirmationCommand request, CancellationToken cancellationToken)
     {
-        if (request.resetPassword == null)
-            throw new ArgumentNullException(nameof(request.resetPassword));
         try
         {
-            ApplicationUser? existuser = await _userManager.FindByEmailAsync(request.resetPassword.Email);
+            if (request == null)
+                throw new UserBusinessException(HttpStatusCode.BadRequest, "Request can't be null");
+            ApplicationUser? existuser = await _userManager.FindByEmailAsync(request.EmailConfirm.Email);
             if (existuser != null)
             {
-                IdentityResult confirm = await _userManager.ConfirmEmailAsync(existuser, request.resetPassword.Token);
+                IdentityResult confirm = await _userManager.ConfirmEmailAsync(existuser, request.EmailConfirm.Token.Replace(" ", "+"));
                 return (confirm.Succeeded) ? true : false;
             }
-            throw new Exception("Invalid user please ! Enter valid credential");
+            throw new UserBusinessException(HttpStatusCode.NotFound, "No User found with this email");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            throw;
+            throw new Exception(ex.Message);
         }
     }
 }

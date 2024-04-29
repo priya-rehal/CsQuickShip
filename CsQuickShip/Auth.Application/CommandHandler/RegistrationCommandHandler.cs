@@ -16,6 +16,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using static Auth.Application.Execptions.BusinessException;
 
 namespace CsRegistrationLogin.Application.CommandHandler;
 public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, string>
@@ -41,59 +42,62 @@ public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, s
     }
     public async Task<string> Handle(RegistrationCommand request, CancellationToken cancellationToken)
     {
-        if (request._userDto == null)
-        {
-            throw new ArgumentNullException(nameof(request._userDto), "UserDto cannot be null");
-        }
-
         try
         {
-            ApplicationUser applicationUser = _mapper.Map<ApplicationUser>(request._userDto);
-
-            ApplicationUser existingUser = await _userRepository.GetFirstAsync(u => u.Email == applicationUser.Email);
-            if (existingUser != null)
+            if (request._userDto == null)
             {
-                throw new InvalidOperationException("User with this email already exists");
+                throw new UserBusinessException(HttpStatusCode.BadRequest, "request can't be null");
             }
-
             if (string.IsNullOrWhiteSpace(request._userDto.Password))
             {
-                throw new InvalidOperationException("Password cannot be null or empty");
+                throw new UserBusinessException(HttpStatusCode.BadRequest,"Password cannot be null or empty");
             }
-
-            applicationUser.PasswordHash = request._userDto.Password ?? throw new InvalidOperationException("Password cannot be null");
-            IdentityResult result = await _userManager.CreateAsync(applicationUser, applicationUser.PasswordHash);
-
-            if (result.Succeeded)
+            ApplicationUser existingUser = await _userRepository.GetFirstAsync(u => u.Email == request._userDto.Email);
+            if (existingUser == null)
             {
-                string emailconfirmationtoken = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
-                string callback_url = EmailCallBackFunction.GenerateCallbackUrl(request._userDto.Email, 
-                                                            emailconfirmationtoken,UrlType.EmailConfirmation);
-                await EnsureRolesExist(); // Ensure roles exist in the database
+                ApplicationUser applicationUser = _mapper.Map<ApplicationUser>(request._userDto);
 
-                var roleName = request._userDto.Role == Constant.Admin ? Constant.Admin : Constant.User;
-                await _userManager.AddToRoleAsync(applicationUser, roleName);
-                _ = Task.Run(() =>
-                 {
-                     _emailSender.SendEmailAsync(
-                                  request._userDto.Email,
-                                  EmailSubjects.ConfirmEmail, 
-                                  $"{EmailBodyMessages.ConfirmEmailBody}{callback_url}");
-                 });
-            }
-            else
-            {
-                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-                throw new InvalidOperationException($"Failed to create user: {errors}");
-            }
+                applicationUser.PasswordHash = request._userDto.Password;
+                IdentityResult result = await _userManager.CreateAsync(applicationUser, applicationUser.PasswordHash);
 
-            ApplicationUserDto createdUserDto = _mapper.Map<ApplicationUserDto>(applicationUser);
-            return "added";
+                if (result.Succeeded)
+                {
+                    await EnsureRolesExist(); // Ensure roles exist in the database
+
+                    var roleName = request._userDto.Role == Constant.Admin ? Constant.Admin : Constant.User;  //Assigning role to user
+                    await _userManager.AddToRoleAsync(applicationUser, roleName);
+
+                    //Sending confirmaiton mail
+                    string emailconfirmationtoken = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
+                    if (string.IsNullOrEmpty(emailconfirmationtoken)) { throw new UserBusinessException(HttpStatusCode.InternalServerError, "Something went wrong"); }
+
+                    string callback_url = EmailCallBackFunction.GenerateCallbackUrl(_appSettings?.FrontendUrl, request._userDto.Email,
+                                                                emailconfirmationtoken, UrlType.EmailConfirmation);
+                    if (string.IsNullOrEmpty(callback_url)) { throw new UserBusinessException(HttpStatusCode.InternalServerError, "Something went wrong"); }
+
+                    _ = Task.Run(async () =>
+                    {
+                        await _emailSender.SendEmailAsync(
+                                     request._userDto.Email,
+                                     EmailSubjects.ConfirmEmail,
+                                     $"{EmailBodyMessages.ConfirmEmailBody}{callback_url}");
+                    });
+                }
+                else
+                {
+                    var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                    throw new InvalidOperationException($"Failed to create user: {errors}");
+                }
+
+                ApplicationUserDto createdUserDto = _mapper.Map<ApplicationUserDto>(applicationUser);
+                return "added";
+            }
+            throw new UserBusinessException(HttpStatusCode.InternalServerError,"Something went wrong");
         }
         catch (Exception ex)
         {
             // Log the exception here
-            throw new InvalidOperationException("An error occurred while registering the user", ex);
+            throw new Exception(ex.Message);
             // Rethrow the exception to maintain the original exception stack trace
         }
     }

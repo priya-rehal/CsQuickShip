@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace Auth.Application.Services;
 public interface IEmailSender
 {
-    void SendEmailAsync(string email, string subject, string body);
+    Task<bool> SendEmailAsync(string email, string subject, string body);
 }

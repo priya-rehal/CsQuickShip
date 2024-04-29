@@ -1,5 +1,4 @@
-﻿using Auth.Domain.Entity.ConfigurationModels;
-using CsRegistrationLogin.Application.Mapper;
+﻿using CsRegistrationLogin.Application.Mapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;

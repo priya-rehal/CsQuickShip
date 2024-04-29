@@ -64,9 +64,9 @@ public class AccountController : ControllerBase
 
     [HttpPost]
     [Route(ApiRoute.EmailConfimation)]
-    public async Task<IActionResult> EmailConfimation([FromBody] ResetPasswordDto resetPassword)
+    public async Task<IActionResult> EmailConfimation([FromBody] EmailConfirmDto emailConfirmDto)
     {
-        bool response = await _sender.Send(new EmailConfirmationCommand(resetPassword));
+        bool response = await _sender.Send(new EmailConfirmationCommand(emailConfirmDto));
         return new ApiResponseActionResult<bool>(response);
 
     }
