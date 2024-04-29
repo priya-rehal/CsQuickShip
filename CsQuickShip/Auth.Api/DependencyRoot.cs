@@ -10,6 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text;
 using Auth.Infrastructure;
+using System.Net.Mail;
+using System.Net;
 
 namespace Auth.Api;
 

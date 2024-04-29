@@ -47,10 +47,54 @@
       ],
       "UpstreamPathTemplate": "/auth/login",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/account/ForgotPassword",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7169
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/forget",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/account/ResetPassword",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7169
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/reset",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/account/EmailConfimation",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7169
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/emailConfimation",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/account/CredentialRegistration",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7197
+        }
+      ],
+      "UpstreamPathTemplate": "/register/accessToken",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     }
-  ],
-  "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:7239"
-  }
-
+  ]
 }

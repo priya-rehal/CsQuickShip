@@ -8,4 +8,5 @@ namespace Auth.Application;
 public class AppSettings
 {
     public string? TokenPhrase { get; set; }
+    public string? FrontendUrl { get; set; }
 }
